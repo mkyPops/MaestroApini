@@ -1,0 +1,13 @@
+# SHARED ACTION: Email Login
+# Reusable component - Use with: runFlow: shared/login.yaml
+
+appId: cloud.apini.qa
+---
+- assertVisible: "Sign in"
+- tapOn: "Your work email"
+- inputText: "${TEST_USER_EMAIL}"
+- hideKeyboard
+- tapOn: "Continue"
+- waitForAnimationToEnd:
+    timeout: 15000
+- assertVisible: "We emailed you a code"
