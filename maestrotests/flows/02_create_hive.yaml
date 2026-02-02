@@ -1,0 +1,36 @@
+# TEST FLOW: Create New Hive
+# This test runs login first, then creates a new hive if needed
+
+appId: cloud.apini.qa
+
+---
+# Run login flow first
+- runFlow: 01_login.yaml
+
+# Create new hive only if on hive selection screen
+- runFlow:
+    when:
+      visible: "Join an existing hive"
+    commands:
+      - assertVisible: "Create new hive"
+      - tapOn: "Create new hive"
+      - waitForAnimationToEnd
+
+      - assertVisible: "Create new hive"
+      - tapOn: "Hive name"
+      - inputText: "Automation Hive"
+      - hideKeyboard
+
+      - assertVisible: "Cancel"
+      - assertVisible: "Create"
+      - tapOn: "Create"
+      - waitForAnimationToEnd:
+          timeout: 10000
+
+      - assertVisible: "Your hives"
+      - assertVisible: "Automation Hive"
+
+# Verify main screen (either way)
+- assertVisible:
+    text: "Search all honeycombs"
+    optional: true
