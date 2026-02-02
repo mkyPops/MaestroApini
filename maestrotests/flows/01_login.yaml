@@ -1,0 +1,47 @@
+# TEST FLOW: Onboarding and Sign In
+# This is a complete end-to-end test scenario
+
+appId: cloud.apini.qa
+
+env:
+  TEST_USER_EMAIL: apini.testing@apini.cloud
+
+---
+- clearState
+- launchApp
+- waitForAnimationToEnd:
+    timeout: 10000
+
+# Onboarding screens
+- assertVisible: "Annotate any object with information."
+- tapOn: "Next"
+- waitForAnimationToEnd
+
+- assertVisible: "Information can be linked or directly added."
+- assertVisible: "Back"
+- tapOn: "Next"
+- waitForAnimationToEnd
+
+- assertVisible: "Invite others for secure collaboration."
+- tapOn: "Finish"
+- waitForAnimationToEnd:
+    timeout: 5000
+
+# Sign in
+- assertVisible: "Sign in"
+- assertVisible: "Continue"
+- assertVisible: "Your work email"
+- tapOn: "Your work email"
+- inputText: "${TEST_USER_EMAIL}"
+- hideKeyboard
+- tapOn: "Continue"
+- waitForAnimationToEnd:
+    timeout: 15000
+
+# Verification code screen
+- assertVisible: "We emailed you a code"
+- assertVisible: "Can't find your code?"
+
+- tapOn:
+    point: 50%,77%
+- inputText: 483920
