@@ -1,0 +1,8 @@
+# SHARED ACTION: Launch App
+# Reusable component - Use with: runFlow: shared/launch_app.yaml
+
+appId: cloud.apini.qa
+---
+- launchApp
+- waitForAnimationToEnd:
+    timeout: 10000
