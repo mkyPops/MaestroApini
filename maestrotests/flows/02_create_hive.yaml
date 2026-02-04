@@ -34,3 +34,4 @@ appId: cloud.apini.qa
 - assertVisible:
     text: "Search all honeycombs"
     optional: true
+# adding a comment
